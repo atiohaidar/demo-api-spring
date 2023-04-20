@@ -4,23 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
-/* Setter based injection
+/* Field Injection
  * jadi ini klo misal ClassKecil nya ga kedaftar di conteiner, bisa ga maslaah, masih bisa
+ * tapi kita ga perlu nge bikin method atau constructor eksplisit buat bikin object nya
  */
 
 
  @Component // tetep dijadii n component supaya kedaftar dan otomatis kebikin objecfctnya sma spring nya
 // ini ga perlu di kasih constructor(karena setter based)
 public class ClassBesar {
+
+    @Autowired(required = false) // jadi ini optional.
     ClassKecil kelasKecil;
     
-    @Autowired(required = false) // jadi ini optional.
-    // yang aku pahami, ini kita coba nyari object kelaskecil di container, tapi klo ga ada ga apa apa.
-    // tapi klo misal ada di container, maka dimasukin ke sini, klo ga ada ga apa apa, karena ga required juga
-    public void setKelasKecil(ClassKecil kelasKecil){// jadi masukinnya make setter
-        this.kelasKecil = kelasKecil;
 
-    }
 
     @PostConstruct // ini anotateyang ngasih tau klo fung si ini otomatis di jjalanin setelah constructornnya di panggil
     public void sayHallo(){
@@ -30,7 +27,9 @@ public class ClassBesar {
                 System.out.println("Kelas Kecilnnya ga terdeteksi");
         }else{
 
-            kelasKecil.haloGes();
+            kelasKecil.haloGes(); // ini kiga ga manggil eksplisit, sebelumnya kita ga masukin nilai kelas kecil
+            // tapi kok bisa tetep masuk klo di kelaskecilnnya di kasih anotate component?
+            // karena kelas kecil udah kedaftar dan properti kelaskecil udah dikasih anotate autowired
         }
     }
 }
