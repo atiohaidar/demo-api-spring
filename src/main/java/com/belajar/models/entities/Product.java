@@ -4,11 +4,13 @@ import java.io.Serializable;
 // ini class untuk bikin tabel nya
 // Seperti DDL nya
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 // jadi disini kita bikin tabel di dalem database tapi dari spring
 
@@ -26,6 +28,15 @@ public class Product implements Serializable {
     @Column(name = "product_description", length = 100) // ini buat ngatur propertinnya, , misal lenght nya   100
     private String description;
     private double price;// ini jadi mumber
+    public Category getCategory() {
+        return category;
+    }
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+    @ManyToOne
+    private Category category;
+
     public Product() {
     }
     public Product(Long id, String name, String description, double price) {

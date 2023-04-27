@@ -35,8 +35,11 @@ public class ProductController {
 
     }
     @GetMapping
-    public Iterable<Product> findAll(){
-        return productService.findAll();
+    public ResponseEntity<ResponseData<Iterable<Product>>> findAll(){
+        ResponseData responseData = new ResponseData<>();
+        responseData.setStatus(true);
+        responseData.setPayload(productService.findAll());
+        return ResponseEntity.ok(responseData);
     }
     @GetMapping("/{id}")
     public Product findProduct(@PathVariable("id") Long id){
