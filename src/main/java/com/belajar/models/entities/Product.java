@@ -4,7 +4,6 @@ import java.io.Serializable;
 // ini class untuk bikin tabel nya
 // Seperti DDL nya
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,11 +20,10 @@ public class Product implements Serializable {
     @Id // dibikin primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // bikin jadi auto increment
 
-    private Long id;   
+    private Long id; 
     @Column(name = "product_name", length = 100) // ini buat ngatur propertinnya, , misal lenght nya   100
     private String name; // ini jadi varchar klo di MYSQL
     @Column(name = "product_description", length = 100) // ini buat ngatur propertinnya, , misal lenght nya   100
-
     private String description;
     private double price;// ini jadi mumber
     public Product() {
